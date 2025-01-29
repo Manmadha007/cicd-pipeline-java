@@ -6,48 +6,48 @@ pipeline {
                 // Job 1
                 echo 'Checking out code...'
                 // Checkout code from your GitHub repository
-                https://github.com/Manmadha007/cicd-pipeline-java.git
+                git 'https://github.com/Manmadha007/cicd-pipeline-java.git'
             }
         }
-        stage('Build Job 1 on Built-In Node') {
-            agent { label 'Built-In Node' }
+        stage('Build Job 1 on Master') {
+            agent { label 'master' }
             steps {
-                echo 'Building Job 1 on Built-In Node...'
+                echo 'Building Job 1 on Master Node...'
                 sh 'mvn clean compile'
             }
         }
-        stage('Test Job 1 on Built-In Node') {
-            agent { label 'Built-In Node' }
+        stage('Test Job 1 on Master') {
+            agent { label 'master' }
             steps {
-                echo 'Testing Job 1 on Built-In Node...'
+                echo 'Testing Job 1 on Master Node...'
                 sh 'mvn test'
             }
         }
-        stage('Deploy Job 1 on Built-In Node') {
-            agent { label 'Built-In Node' }
+        stage('Deploy Job 1 on Master') {
+            agent { label 'master' }
             steps {
-                echo 'Deploying Job 1 on Built-In Node...'
+                echo 'Deploying Job 1 on Master Node...'
                 sh 'echo Deploying Job 1'
             }
         }
-        stage('Build Job 2 on slave1') {
-            agent { label 'slave1' }
+        stage('Build Job 2 on Slave') {
+            agent { label 'slaveNode' }
             steps {
-                echo 'Building Job 2 on slave1...'
+                echo 'Building Job 2 on Slave Node...'
                 sh 'mvn clean compile'
             }
         }
-        stage('Test Job 2 on slave1') {
-            agent { label 'slave1' }
+        stage('Test Job 2 on Slave') {
+            agent { label 'slaveNode' }
             steps {
-                echo 'Testing Job 2 on slave1...'
+                echo 'Testing Job 2 on Slave Node...'
                 sh 'mvn test'
             }
         }
-        stage('Deploy Job 2 on slave1') {
-            agent { label 'slave1' }
+        stage('Deploy Job 2 on Slave') {
+            agent { label 'slaveNode' }
             steps {
-                echo 'Deploying Job 2 on slave1...'
+                echo 'Deploying Job 2 on Slave Node...'
                 sh 'echo Deploying Job 2'
             }
         }
