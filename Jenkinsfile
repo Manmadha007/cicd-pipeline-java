@@ -5,7 +5,7 @@ pipeline {
             steps {
                 // Job 1
                 echo 'Checking out code...'
-                // Checkout code from your GitHub repository, specifying the branch
+                // Checkout code from your GitHub repository
                 git branch: 'TEST', url: 'https://github.com/Manmadha007/cicd-pipeline-java.git'
             }
         }
@@ -31,18 +31,37 @@ pipeline {
             }
         }
         stage('Build Job 2 on slave1') {
-            agent { label 'slave1' }
+            agent { label 'slave1' }  // Fixed missing closing quote
             steps {
                 echo 'Building Job 2 on slave1...'
                 sh 'mvn clean compile'
             }
         }
         stage('Test Job 2 on slave1') {
-            agent { label 'slave1' }
+            agent { label 'slave1' }  // Fixed missing closing quote
             steps {
                 echo 'Testing Job 2 on slave1...'
                 sh 'mvn test'
             }
         }
         stage('Deploy Job 2 on slave1') {
-            agent { label 'slave1
+            agent { label 'slave1' }  // Fixed missing closing quote
+            steps {
+                echo 'Deploying Job 2 on slave1...'
+                sh 'echo Deploying Job 2'
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Cleaning up...'
+            // Perform cleanup actions, e.g., deleting temporary files
+        }
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed. Please check the logs.'
+        }
+    }
+}
