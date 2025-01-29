@@ -10,7 +10,7 @@ pipeline {
             }
         }
         stage('Build Job 1') {
-            agent any  // Use the master/controller node
+            agent { label 'master' } // Use the master/controller node
             steps {
                 echo 'Building Job 1 on Built-In Node...'
                 sh 'mvn clean compile'
