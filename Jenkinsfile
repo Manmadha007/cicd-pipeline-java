@@ -9,22 +9,22 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Build Job 1 on Built-In Node') {
-            agent { label 'Built-In Node' }
+        stage('Build Job 1') {
+            agent any  // Use the master/controller node
             steps {
                 echo 'Building Job 1 on Built-In Node...'
                 sh 'mvn clean compile'
             }
         }
-        stage('Test Job 1 on Built-In Node') {
-            agent { label 'Built-In Node' }
+        stage('Test Job 1') {
+            agent any  // Use the master/controller node
             steps {
                 echo 'Testing Job 1 on Built-In Node...'
                 sh 'mvn test'
             }
         }
-        stage('Deploy Job 1 on Built-In Node') {
-            agent { label 'Built-In Node' }
+        stage('Deploy Job 1') {
+            agent any  // Use the master/controller node
             steps {
                 echo 'Deploying Job 1 on Built-In Node...'
                 sh 'echo Deploying Job 1'
