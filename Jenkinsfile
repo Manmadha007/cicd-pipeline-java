@@ -6,7 +6,7 @@ pipeline {
                 // Job 1
                 echo 'Checking out code...'
                 // Checkout code from your GitHub repository
-                https://github.com/Manmadha007/cicd-pipeline-java.git
+                checkout scm
             }
         }
         stage('Build Job 1 on Built-In Node') {
