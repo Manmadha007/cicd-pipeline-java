@@ -16,39 +16,11 @@ pipeline {
                 sh 'mvn clean compile'
             }
         }
-        stage('Test Job 1') {
-            agent any  // Use the master/controller node
-            steps {
-                echo 'Testing Job 1 on Built-In Node...'
-                sh 'mvn test'
-            }
-        }
-        stage('Deploy Job 1') {
-            agent any  // Use the master/controller node
-            steps {
-                echo 'Deploying Job 1 on Built-In Node...'
-                sh 'echo Deploying Job 1'
-            }
-        }
         stage('Build Job 2 on slave1') {
-            agent { label 'slave1' }  // Fixed missing closing quote
+            agent { label 'slave1' }  // Use the slave1 node for this stage
             steps {
                 echo 'Building Job 2 on slave1...'
                 sh 'mvn clean compile'
-            }
-        }
-        stage('Test Job 2 on slave1') {
-            agent { label 'slave1' }  // Fixed missing closing quote
-            steps {
-                echo 'Testing Job 2 on slave1...'
-                sh 'mvn test'
-            }
-        }
-        stage('Deploy Job 2 on slave1') {
-            agent { label 'slave1' }  // Fixed missing closing quote
-            steps {
-                echo 'Deploying Job 2 on slave1...'
-                sh 'echo Deploying Job 2'
             }
         }
     }
