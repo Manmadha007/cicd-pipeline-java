@@ -1,30 +1,41 @@
 pipeline {
     agent any
-
+    tools {
+        maven 'Maven' // Ensure Maven is configured in Jenkins
+        jdk 'JDK'     // Ensure JDK is configured in Jenkins
+    }
     stages {
-        stage('Checkout') {
-            steps {
-                echo 'Checking out source code...'
-                // Replace with your SCM checkout command
-                // For example, for Git:
-                // git url: 'https://github.com/Manmadha007/cicd-pipeline-java.git'
-            }
-        }
         stage('Build') {
             steps {
-                echo 'Building the application...'
-                // Add your build commands here
-                // For example, for a Maven project:
-                // sh 'mvn clean package'
+                echo 'Building the project...'
+                sh 'mvn -B -DskipTests clean package'
             }
         }
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                // Add your test commands here
-                // For example, for a Maven project:
-                // sh 'mvn test'
+                sh 'mvn test'
             }
+            post {
+                always {
+                    echo 'Publishing test results...'
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
+        stage('Deliver') {
+            steps {
+                echo 'Delivering the application...'
+                sh './jenkins/scripts/deliver.sh'
+            }
+        }
+    }
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed. Check the logs.'
         }
     }
 }
