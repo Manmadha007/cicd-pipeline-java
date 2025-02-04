@@ -3,7 +3,6 @@ pipeline {
     tools {
         maven 'MAVEN' // Ensure Maven is configured in Jenkins
         jdk 'JDK'     // Ensure JDK is configured in Jenkins
-        git 'Default'
     }
     stages {
         stage('Build') {
