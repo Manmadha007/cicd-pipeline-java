@@ -20,13 +20,6 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                // Run a shell command for testing
-                sh 'echo "Running tests..."'
-            }
-        }
-
         stage('Deploy') {
             steps {
                 // Run a shell command for deploying
