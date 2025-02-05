@@ -15,6 +15,7 @@ pipeline {
             steps {
                 // Run a shell command (e.g., build or compile)
                 sh 'echo "Building the project..."'
+                sh 'echo "Building the project..."'
                 sh 'mvn clean install package'
             }
         }
